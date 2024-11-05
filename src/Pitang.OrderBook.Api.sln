@@ -1,0 +1,105 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34309.116
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pitang.OrderBook.Api", "Pitang.OrderBook.Api\Pitang.OrderBook.Api.csproj", "{B46507A6-D5C5-4208-858B-2FA5B1F4BC68}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "artifacts", "artifacts", "{BB52D572-878D-49E4-9877-C722FA20D525}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{D9317B1F-CE13-4864-A24C-845AF0D38454}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{09827E55-6623-4A5C-8646-8AD58C15DEE9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docker", "docker", "{1FA0F6D1-A2AD-48E9-A9CC-B540C20A0E9C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "k8s", "k8s", "{1953DC01-56EF-4109-8673-FD096B2566D1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "pipelines", "pipelines", "{7FF943E8-DB2D-4BD0-B242-656D55BE7B91}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pitang.OrderBook.UnitTests", "Pitang.OrderBook.UnitTests\Pitang.OrderBook.UnitTests.csproj", "{B5C85050-56A2-4D2A-89BF-F7D76684DE7C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pitang.OrderBook.Domain", "Pitang.OrderBook.Domain\Pitang.OrderBook.Domain.csproj", "{ACBA10FC-198B-4427-99D7-EDFE94566FD6}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pitang.OrderBook.Application", "Pitang.OrderBook.Application\Pitang.OrderBook.Application.csproj", "{BCE82758-0137-4343-94EE-1C4B1463D203}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pitang.OrderBook.Infra.CrossCutting", "Pitang.OrderBook.Infra.CrossCutting\Pitang.OrderBook.Infra.CrossCutting.csproj", "{69A52AD7-CD9A-44EE-B8E7-DD1F15A8118E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pitang.OrderBook.Infra.Data", "Pitang.OrderBook.Infra.Data\Pitang.OrderBook.Infra.Data.csproj", "{82ADA57D-CC25-4C90-9A22-826D7B23A3FB}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pitang.OrderBook.Infra.IoC", "Pitang.OrderBook.Infra.IoC\Pitang.OrderBook.Infra.IoC.csproj", "{D34DC78F-138A-402D-83F2-FEEBBBB491D1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docker-compose", "docker-compose", "{25CB0D3D-D0C8-48FE-8502-4C6446BBE16F}"
+	ProjectSection(SolutionItems) = preProject
+		..\artifacts\docker-compose\mongodb-docker-compose.yml = ..\artifacts\docker-compose\mongodb-docker-compose.yml
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pitang.OrderBook.LiveOrderBook.Worker", "Pitang.OrderBook.LiveOrderBook.Worker\Pitang.OrderBook.LiveOrderBook.Worker.csproj", "{93C0E092-5281-4649-9637-6046B6D4A577}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pitang.OrderBook.Metrics.Worker", "Pitang.OrderBook.Metrics.Worker\Pitang.OrderBook.Metrics.Worker.csproj", "{C4CB132D-98D0-42E1-9634-11F28C555DEF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B46507A6-D5C5-4208-858B-2FA5B1F4BC68}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B46507A6-D5C5-4208-858B-2FA5B1F4BC68}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B46507A6-D5C5-4208-858B-2FA5B1F4BC68}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B46507A6-D5C5-4208-858B-2FA5B1F4BC68}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B5C85050-56A2-4D2A-89BF-F7D76684DE7C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B5C85050-56A2-4D2A-89BF-F7D76684DE7C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B5C85050-56A2-4D2A-89BF-F7D76684DE7C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B5C85050-56A2-4D2A-89BF-F7D76684DE7C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ACBA10FC-198B-4427-99D7-EDFE94566FD6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ACBA10FC-198B-4427-99D7-EDFE94566FD6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ACBA10FC-198B-4427-99D7-EDFE94566FD6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ACBA10FC-198B-4427-99D7-EDFE94566FD6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BCE82758-0137-4343-94EE-1C4B1463D203}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BCE82758-0137-4343-94EE-1C4B1463D203}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BCE82758-0137-4343-94EE-1C4B1463D203}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BCE82758-0137-4343-94EE-1C4B1463D203}.Release|Any CPU.Build.0 = Release|Any CPU
+		{69A52AD7-CD9A-44EE-B8E7-DD1F15A8118E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{69A52AD7-CD9A-44EE-B8E7-DD1F15A8118E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{69A52AD7-CD9A-44EE-B8E7-DD1F15A8118E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{69A52AD7-CD9A-44EE-B8E7-DD1F15A8118E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{82ADA57D-CC25-4C90-9A22-826D7B23A3FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{82ADA57D-CC25-4C90-9A22-826D7B23A3FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{82ADA57D-CC25-4C90-9A22-826D7B23A3FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{82ADA57D-CC25-4C90-9A22-826D7B23A3FB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D34DC78F-138A-402D-83F2-FEEBBBB491D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D34DC78F-138A-402D-83F2-FEEBBBB491D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D34DC78F-138A-402D-83F2-FEEBBBB491D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D34DC78F-138A-402D-83F2-FEEBBBB491D1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{93C0E092-5281-4649-9637-6046B6D4A577}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{93C0E092-5281-4649-9637-6046B6D4A577}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{93C0E092-5281-4649-9637-6046B6D4A577}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{93C0E092-5281-4649-9637-6046B6D4A577}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C4CB132D-98D0-42E1-9634-11F28C555DEF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C4CB132D-98D0-42E1-9634-11F28C555DEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C4CB132D-98D0-42E1-9634-11F28C555DEF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C4CB132D-98D0-42E1-9634-11F28C555DEF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{B46507A6-D5C5-4208-858B-2FA5B1F4BC68} = {D9317B1F-CE13-4864-A24C-845AF0D38454}
+		{1FA0F6D1-A2AD-48E9-A9CC-B540C20A0E9C} = {BB52D572-878D-49E4-9877-C722FA20D525}
+		{1953DC01-56EF-4109-8673-FD096B2566D1} = {BB52D572-878D-49E4-9877-C722FA20D525}
+		{7FF943E8-DB2D-4BD0-B242-656D55BE7B91} = {BB52D572-878D-49E4-9877-C722FA20D525}
+		{B5C85050-56A2-4D2A-89BF-F7D76684DE7C} = {09827E55-6623-4A5C-8646-8AD58C15DEE9}
+		{ACBA10FC-198B-4427-99D7-EDFE94566FD6} = {D9317B1F-CE13-4864-A24C-845AF0D38454}
+		{BCE82758-0137-4343-94EE-1C4B1463D203} = {D9317B1F-CE13-4864-A24C-845AF0D38454}
+		{69A52AD7-CD9A-44EE-B8E7-DD1F15A8118E} = {D9317B1F-CE13-4864-A24C-845AF0D38454}
+		{82ADA57D-CC25-4C90-9A22-826D7B23A3FB} = {D9317B1F-CE13-4864-A24C-845AF0D38454}
+		{D34DC78F-138A-402D-83F2-FEEBBBB491D1} = {D9317B1F-CE13-4864-A24C-845AF0D38454}
+		{25CB0D3D-D0C8-48FE-8502-4C6446BBE16F} = {BB52D572-878D-49E4-9877-C722FA20D525}
+		{93C0E092-5281-4649-9637-6046B6D4A577} = {D9317B1F-CE13-4864-A24C-845AF0D38454}
+		{C4CB132D-98D0-42E1-9634-11F28C555DEF} = {D9317B1F-CE13-4864-A24C-845AF0D38454}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {576456A9-6CF6-4220-9F6A-2D878DEE9033}
+	EndGlobalSection
+EndGlobal

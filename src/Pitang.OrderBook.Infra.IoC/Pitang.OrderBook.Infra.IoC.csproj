@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Pitang.OrderBook.Application\Pitang.OrderBook.Application.csproj" />
+    <ProjectReference Include="..\Pitang.OrderBook.Domain\Pitang.OrderBook.Domain.csproj" />
+    <ProjectReference Include="..\Pitang.OrderBook.Infra.CrossCutting\Pitang.OrderBook.Infra.CrossCutting.csproj" />
+    <ProjectReference Include="..\Pitang.OrderBook.Infra.Data\Pitang.OrderBook.Infra.Data.csproj" />
+  </ItemGroup>
+
+</Project>
