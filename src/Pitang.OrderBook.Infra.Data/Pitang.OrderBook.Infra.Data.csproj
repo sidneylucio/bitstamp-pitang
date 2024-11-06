@@ -16,8 +16,4 @@
     <ProjectReference Include="..\Pitang.OrderBook.Domain\Pitang.OrderBook.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Context\" />
-  </ItemGroup>
-
 </Project>

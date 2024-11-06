@@ -1,23 +1,29 @@
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
-USER app
 WORKDIR /app
+EXPOSE 80
 EXPOSE 8080
-EXPOSE 8081
 
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
-ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["Pitang.OrderBook.Api/Pitang.OrderBook.Api.csproj", "Pitang.OrderBook.Api/"]
-RUN dotnet restore "./Pitang.OrderBook.Api/./Pitang.OrderBook.Api.csproj"
-COPY . .
-WORKDIR "/src/Pitang.OrderBook.Api"
-RUN dotnet build "./Pitang.OrderBook.Api.csproj" -c $BUILD_CONFIGURATION -o /app/build
+
+COPY ["src/Pitang.OrderBook.Api/Pitang.OrderBook.Api.csproj", "src/Pitang.OrderBook.Api/"]
+COPY ["src/Pitang.OrderBook.Infra.IoC/Pitang.OrderBook.Infra.IoC.csproj", "src/Pitang.OrderBook.Infra.IoC/"]
+COPY ["src/Pitang.OrderBook.Application/Pitang.OrderBook.Application.csproj", "src/Pitang.OrderBook.Application/"]
+COPY ["src/Pitang.OrderBook.Domain/Pitang.OrderBook.Domain.csproj", "src/Pitang.OrderBook.Domain/"]
+COPY ["src/Pitang.OrderBook.Infra.CrossCutting/Pitang.OrderBook.Infra.CrossCutting.csproj", "src/Pitang.OrderBook.Infra.CrossCutting/"]
+COPY ["src/Pitang.OrderBook.Infra.Data/Pitang.OrderBook.Infra.Data.csproj", "src/Pitang.OrderBook.Infra.Data/"]
+
+RUN dotnet restore "./src/Pitang.OrderBook.Api/Pitang.OrderBook.Api.csproj"
+COPY src/ src/
+
+WORKDIR "/src/src/Pitang.OrderBook.Api"
+RUN dotnet build "./Pitang.OrderBook.Api.csproj" -c Release -o /app/build
 
 FROM build AS publish
-ARG BUILD_CONFIGURATION=Release
-RUN dotnet publish "./Pitang.OrderBook.Api.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "./Pitang.OrderBook.Api.csproj" -c Release -o /app/publish /p:UseAppHost=false
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
+
 ENTRYPOINT ["dotnet", "Pitang.OrderBook.Api.dll"]

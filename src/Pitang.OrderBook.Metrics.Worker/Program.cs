@@ -1,10 +1,10 @@
+using Pitang.OrderBook.Infra.IoC.DI;
 using Pitang.OrderBook.Metrics.Worker;
-using Pitang.OrderBook.Infra.IoC.DependencyInjection;
 
 var builder = Host.CreateApplicationBuilder(args);
 builder.Services.AddHostedService<Worker>();
 
-builder.Services.AddApplicationDependencies();
+builder.Services.AddOrderBookDependencies(builder.Configuration);
 
 var host = builder.Build();
 host.Run();

@@ -1,51 +1,35 @@
 ﻿using MediatR;
 using Pitang.OrderBook.Application.Commands;
 using Pitang.OrderBook.Application.DTOs;
+using Pitang.OrderBook.Application.Strategies.SimulateBestPrice;
 using Pitang.OrderBook.Domain.Entities;
 using Pitang.OrderBook.Domain.Exceptions;
 using Pitang.OrderBook.Domain.Interfaces;
 
 namespace Pitang.OrderBook.Application.Handlers;
-
-public class SimulateBestPriceHandler(ISimulationRepository simulationRepository, IOrderBookRepository orderBookRepository) : IRequestHandler<SimulateBestPriceCommand, SimulationResponseDto>
+public class SimulateBestPriceHandler : IRequestHandler<SimulateBestPriceCommand, SimulationResponseDto>
 {
+    private readonly ISimulationRepository _simulationRepository;
+    private readonly IOrderBookRepository _orderBookRepository;
+    private readonly IOrderSelectionStrategyFactory _strategyFactory;
+
+    public SimulateBestPriceHandler(ISimulationRepository simulationRepository, IOrderBookRepository orderBookRepository, IOrderSelectionStrategyFactory strategyFactory)
+    {
+        _simulationRepository = simulationRepository;
+        _orderBookRepository = orderBookRepository;
+        _strategyFactory = strategyFactory;
+    }
+
     public async Task<SimulationResponseDto> Handle(SimulateBestPriceCommand request, CancellationToken cancellationToken)
     {
-        var latestOrderBook = await orderBookRepository.GetLatestOrderBookAsync(request.Instrument);
+        var latestOrderBook = await _orderBookRepository.GetLatestOrderBookAsync(request.Instrument);
         if (latestOrderBook == null)
             throw new BadRequestException("Nenhum dado de ordem encontrado para o instrumento especificado.");
 
-        var orders = request.Operation.ToLower() == "buy"
-            ? latestOrderBook.Asks.OrderBy(order => double.Parse(order.Price)).ToList()
-            : latestOrderBook.Bids.OrderByDescending(order => double.Parse(order.Price)).ToList();
+        var strategy = _strategyFactory.GetStrategy(request.Operation);
+        var usedOrders = strategy.SelectOrders(latestOrderBook, request.Quantity);
 
-        double accumulatedQuantity = 0;
-        double totalPrice = 0;
-        var usedOrders = new List<OrderDetail>();
-
-        foreach (var order in orders)
-        {
-            var orderQuantity = double.Parse(order.Quantity);
-            var orderPrice = double.Parse(order.Price);
-
-            if (accumulatedQuantity + orderQuantity >= request.Quantity)
-            {
-                var remainingQuantity = request.Quantity - accumulatedQuantity;
-                totalPrice += remainingQuantity * orderPrice;
-                usedOrders.Add(new OrderDetail(order.Price, remainingQuantity.ToString()));
-                accumulatedQuantity = request.Quantity;
-                break;
-            }
-            else
-            {
-                totalPrice += orderQuantity * orderPrice;
-                usedOrders.Add(new OrderDetail(order.Price, order.Quantity));
-                accumulatedQuantity += orderQuantity;
-            }
-        }
-
-        if (accumulatedQuantity < request.Quantity)
-            throw new BadRequestException($"Quantidade insuficiente para atender a solicitação. Quantidade acumulada: {accumulatedQuantity}");
+        var totalPrice = usedOrders.Sum(order => double.Parse(order.Quantity) * double.Parse(order.Price));
 
         var response = new SimulationResponseDto(
             Guid.NewGuid(),
@@ -72,6 +56,6 @@ public class SimulateBestPriceHandler(ISimulationRepository simulationRepository
             UsedOrders = simulation.UsedOrders.Select(x => new OrderBookDetail(x.Price, x.Quantity)).ToList()
         };
 
-        await simulationRepository.SaveAsync(_simulation);
+        await _simulationRepository.SaveAsync(_simulation);
     }
 }

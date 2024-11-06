@@ -1,4 +1,6 @@
-﻿using MongoDB.Driver;
+﻿using Microsoft.Extensions.Options;
+using MongoDB.Driver;
+using Pitang.OrderBook.Domain.Configurations;
 using Pitang.OrderBook.Domain.Entities;
 using Pitang.OrderBook.Domain.Interfaces;
 
@@ -8,9 +10,9 @@ public class Repository<T> : IRepository<T> where T : Entity
 {
     protected readonly IMongoCollection<T> Collection;
 
-    public Repository(IMongoClient mongoClient, string collectionName)
+    public Repository(IMongoClient mongoClient, string collectionName, IOptions<OrderBookSettings> options)
     {
-        var database = mongoClient.GetDatabase("OrderBookDb");
+        var database = mongoClient.GetDatabase(options.Value.DatabaseName);
         Collection = database.GetCollection<T>(collectionName);
     }
 

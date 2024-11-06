@@ -31,7 +31,7 @@ public class MetricsHandler : IRequestHandler<MetricsCommand, Unit>
         var currentAvgPrice = messages.Average(m => m.Bids.Concat(m.Asks).Average(o => double.Parse(o.Price)));
         var avgQuantity = messages.Average(m => m.Bids.Concat(m.Asks).Average(o => double.Parse(o.Quantity)));
 
-        _logger.LogInformation($"[{request.Instrument}] Maior preço de compra: {highestBid}, Menor preço de venda: {lowestAsk}, Média atual de preço: {currentAvgPrice}, Média de quantidade: {avgQuantity}");
+        _logger.LogInformation($"[{request.Instrument}]{Environment.NewLine} Maior preço de compra: {highestBid},{Environment.NewLine} Menor preço de venda: {lowestAsk},{Environment.NewLine} Média atual de preço: {currentAvgPrice},{Environment.NewLine} Média de quantidade: {avgQuantity}");
 
         return Unit.Value;
     }

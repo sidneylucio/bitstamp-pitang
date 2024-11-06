@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pitang-orderbook-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pitang-orderbook-api
+  template:
+    metadata:
+      labels:
+        app: pitang-orderbook-api
+    spec:
+      containers:
+      - name: pitang-orderbook-api
+        image: pitang-orderbook-api:latest
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: pitang-orderbook-api-service
+spec:
+  type: NodePort
+  selector:
+    app: pitang-orderbook-api
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 8080 

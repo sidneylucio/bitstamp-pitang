@@ -1,12 +1,14 @@
 ﻿using MongoDB.Driver;
 using Entities = Pitang.OrderBook.Domain.Entities;
 using Pitang.OrderBook.Domain.Interfaces;
+using Microsoft.Extensions.Options;
+using Pitang.OrderBook.Domain.Configurations;
 
 namespace Pitang.OrderBook.Infra.Data.Repositories;
 
 public class OrderBookRepository : Repository<Entities.OrderBook>, IOrderBookRepository
 {
-    public OrderBookRepository(IMongoClient mongoClient) : base(mongoClient, "OrderBook")
+    public OrderBookRepository(IMongoClient mongoClient, IOptions<OrderBookSettings> options) : base(mongoClient, "OrderBook", options)
     {
     }
 

@@ -1,0 +1,23 @@
+docker build -t pitang-orderbook-api -f src/Pitang.OrderBook.Api/Dockerfile .
+docker build -t pitang-orderbook-liveorderbook-worker -f src/Pitang.OrderBook.LiveOrderBook.Worker/Dockerfile .
+docker build -t pitang-orderbook-metrics-worker -f src/Pitang.OrderBook.Metrics.Worker/Dockerfile .
+
+minikube image load pitang-orderbook-api:latest
+minikube image load pitang-orderbook-liveorderbook-worker:latest
+minikube image load pitang-orderbook-metrics-worker:latest
+
+kubectl delete deployment pitang-orderbook-api
+kubectl delete deployment pitang-orderbook-liveorderbook-worker  
+kubectl delete deployment pitang-orderbook-metrics-worker
+
+kubectl delete service pitang-orderbook-api
+kubectl delete service pitang-orderbook-liveorderbook-worker  
+kubectl delete service pitang-orderbook-metrics-worker
+
+kubectl apply -f src/Pitang.OrderBook.Api/deployment.yaml
+kubectl apply -f src/Pitang.OrderBook.LiveOrderBook.Worker/deployment.yaml
+kubectl apply -f src/Pitang.OrderBook.Metrics.Worker/deployment.yaml
+# kubectl apply -f src/Pitang.OrderBook.Infra.Data/deployment.yaml
+
+
+# docker run -d -p 27017:27017 --name mongodb-container -e MONGO_INITDB_ROOT_USERNAME=admin -e MONGO_INITDB_ROOT_PASSWORD=admin mongo
